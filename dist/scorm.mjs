@@ -20,7 +20,7 @@ function findAPI(win) {
     return win.API;
 }
 /**
- *
+ * getAPI
  */
 function getAPI() {
     // start by looking for the API in the current window
@@ -59,7 +59,6 @@ function getApiHandle() {
     }
     return API;
 }
-//# sourceMappingURL=helpers.js.map
 
 var Scorm = /** @class */ (function () {
     function Scorm(opts) {
@@ -119,7 +118,5 @@ var Scorm = /** @class */ (function () {
     };
     return Scorm;
 }());
-
-//# sourceMappingURL=index.js.map
 
 export { Scorm };
