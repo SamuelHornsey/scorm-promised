@@ -1,0 +1,22 @@
+{
+  "name": "scorm-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "rollup.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build:watch": "rollup -c rollup.config.js --watch",
+    "build:prod": "rollup -c rollup.config.js"
+  },
+  "author": "Samuel Hornsey (SH)",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "rollup": "^1.5.0",
+    "rollup-plugin-typescript": "^1.0.0",
+    "tslib": "^1.9.3",
+    "typescript": "^3.3.3333"
+  }
+}
