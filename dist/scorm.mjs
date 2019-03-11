@@ -12,8 +12,7 @@ function findAPI(win) {
         attempts++;
         // Note: 7 is an arbitrary number, but should be more than sufficient
         if (attempts > 7) {
-            debug(true, 'Error finding API');
-            return null;
+            throw new Error("API not found");
         }
         win = win.parent;
     }
@@ -36,19 +35,11 @@ function getAPI() {
     // if the API has not been found
     if (api == null) {
         // Alert the user that the API Adapter could not be found
-        debug(true, 'Unable to find an API adapter');
+        throw new Error("API not found");
     }
     API = api;
     isFound = true;
     return api;
-}
-/**
- * Console logs debug messages
- */
-function debug(debug, msg) {
-    if (!debug)
-        return;
-    console.info("API Message: " + msg);
 }
 /**
  *
@@ -59,64 +50,40 @@ function getApiHandle() {
     }
     return API;
 }
+//# sourceMappingURL=helpers.js.map
 
-var Scorm = /** @class */ (function () {
-    function Scorm(opts) {
-        if (opts === void 0) { opts = { debug: false }; }
-        this.API = null;
-        this.debug = false;
-        this.isActive = false;
-        this.debug = opts.debug;
-        this.API = getApiHandle();
-    }
-    /**
-     * Initializes the SCORM API
-     */
-    Scorm.prototype.init = function () {
-        if (this.isActive)
-            return true;
-        var success = this.API.LMSInitialize('');
-        debug(this.debug, "LMS Status " + success);
-        if (success) {
-            this.isActive = true;
-            return success;
-        }
-        return success;
-    };
-    /**
-     * Terminates the SCORM session
-     */
-    Scorm.prototype.terminate = function () {
-        this.set('cmi.core.exit', 'suspend');
-        this.commit();
-        this.API.LMSFinish('');
-        return true;
-    };
-    /**
-     * Gets a parameter from the SCORM API
-     * @param param
-     */
-    Scorm.prototype.get = function (param) {
-        var val = this.API.LMSGetValue(param);
-        debug(this.debug, "this.API.LMSGetValue(" + param + ") = " + val);
-        return val;
-    };
-    /**
-     * Sets a parameter in the SCORM API
-     * @param param
-     * @param value
-     */
-    Scorm.prototype.set = function (param, value) {
-        debug(this.debug, "this.API.LMSSetValue(" + param + ", " + value + ")");
-        this.API.LMSSetValue(param, value);
-    };
-    /**
-     * Commits data to the LMS
-     */
-    Scorm.prototype.commit = function () {
-        return this.API.LMSCommit('');
-    };
-    return Scorm;
-}());
+var API$1 = getApiHandle();
+function init() {
+    return new Promise(function (res, rej) {
+        if (!API$1)
+            return rej();
+        var success = API$1.LMSInitialize('');
+        if (success)
+            return res(true);
+        return rej();
+    });
+}
+function terminate() {
+    return new Promise(function (res, rej) {
+        res(true);
+    });
+}
+function set(param, val) {
+    return new Promise(function (res, rej) {
+        res(true);
+    });
+}
+function get(param) {
+    return new Promise(function (res, rej) {
+        res('res');
+    });
+}
+function commit() {
+    return new Promise(function (res, rej) {
+        res(true);
+    });
+}
 
-export { Scorm };
+//# sourceMappingURL=index.js.map
+
+export { set, get, terminate, commit, init };

@@ -1,73 +1,39 @@
-import { debug, getApiHandle } from './helpers';
+import { getApiHandle } from './helpers';
 
-// Config interface
-interface scormConf {
-    debug?: boolean;
+const API: any = getApiHandle();
+
+export function init (): Promise<boolean> {
+    return new Promise ((res, rej) => {
+        if (!API) return rej();
+
+        let success = API.LMSInitialize('');
+
+        if (success) return res(true);
+
+        return rej();
+    });
 }
 
-export default class Scorm {
-    private API: any = null;
-    private debug: boolean = false;
-    private isActive: boolean = false;
+export function terminate (): Promise<boolean> {
+    return new Promise ((res, rej) => {
+        res(true);
+    });
+}
 
-    constructor (opts: scormConf = { debug: false }) {
-        this.debug = opts.debug;
-        this.API = getApiHandle();
-    }
+export function set (param: string, val: string): Promise<boolean> {
+    return new Promise ((res, rej) => {
+        res(true);
+    });
+}
 
-    /**
-     * Initializes the SCORM API
-     */
-    public init (): boolean {
-        if (this.isActive) return true;
+export function get (param: string): Promise<string> {
+    return new Promise ((res, rej) => {
+        res('res');
+    });
+}
 
-        let success = this.API.LMSInitialize('');
-
-        debug(this.debug, `LMS Status ${success}`);
-
-        if (success) {
-            this.isActive = true;
-            return success;
-        }
-
-        return success;
-    }
-
-    /**
-     * Terminates the SCORM session
-     */
-    public terminate (): boolean {
-        this.set('cmi.core.exit', 'suspend');
-        this.commit();
-
-        this.API.LMSFinish('');
-        return true;
-    }
-
-    /**
-     * Gets a parameter from the SCORM API
-     * @param param 
-     */
-    public get (param: string): string {
-        let val = this.API.LMSGetValue(param);
-        debug(this.debug, `this.API.LMSGetValue(${param}) = ${val}`);
-        return val;
-    }
-
-    /**
-     * Sets a parameter in the SCORM API
-     * @param param 
-     * @param value 
-     */
-    public set (param: string, value: string): void {
-        debug(this.debug, `this.API.LMSSetValue(${param}, ${value})`);
-        this.API.LMSSetValue(param, value);
-    }
-
-    /**
-     * Commits data to the LMS
-     */
-    public commit (): boolean {
-        return this.API.LMSCommit('');
-    }
+export function commit (): Promise<boolean> {
+    return new Promise ((res, rej) => {
+        res(true);
+    });
 }

@@ -1,3 +1,3 @@
-import Scorm from './scorm';
+import { set, get, terminate, commit, init } from './scorm';
 
-export { Scorm };
+export { set, get, terminate, commit, init };

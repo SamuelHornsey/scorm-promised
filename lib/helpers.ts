@@ -15,8 +15,7 @@ function findAPI(win: any): object {
 
     // Note: 7 is an arbitrary number, but should be more than sufficient
     if (attempts > 7) {
-      debug(true, 'Error finding API');
-      return null;
+      throw new Error("API not found");
     }
 
     win = win.parent;
@@ -45,7 +44,7 @@ function getAPI(): object {
   // if the API has not been found
   if (api == null) {
     // Alert the user that the API Adapter could not be found
-    debug(true, 'Unable to find an API adapter');
+    throw new Error("API not found");
   }
 
   API = api;
@@ -54,21 +53,12 @@ function getAPI(): object {
 }
 
 /**
- * Console logs debug messages
- */
-export function debug(debug: boolean, msg: string): void {
-  if (!debug) return;
-
-  console.info(`API Message: ${msg}`);
-}
-
-/**
- * 
+ *
  */
 export function getApiHandle(): object {
-    if (!API || !isFound) {
-        return getAPI();
-    }
+  if (!API || !isFound) {
+    return getAPI();
+  }
 
-    return API;
+  return API;
 }
