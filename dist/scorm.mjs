@@ -42,7 +42,7 @@ function getAPI() {
     return api;
 }
 /**
- *
+ * Get the API handle
  */
 function getApiHandle() {
     if (!API || !isFound) {
@@ -50,40 +50,73 @@ function getApiHandle() {
     }
     return API;
 }
-//# sourceMappingURL=helpers.js.map
 
+// API Handle
 var API$1 = getApiHandle();
+/**
+ * Initialises the API
+ */
 function init() {
     return new Promise(function (res, rej) {
         if (!API$1)
-            return rej();
-        var success = API$1.LMSInitialize('');
+            return rej('API Not found');
+        var success = (API$1.LMSInitialize('') === 'true');
         if (success)
             return res(true);
-        return rej();
+        return rej('Unable to init API');
     });
 }
+/**
+ * Terminates the API
+ */
 function terminate() {
     return new Promise(function (res, rej) {
-        res(true);
+        if (!API$1)
+            return rej('API Not found');
+        return set('cmi.core.exit', 'suspend')
+            .then(function () { return commit(); })
+            .then(function () { return API$1.LMSFinish(''); });
     });
 }
+/**
+ * Sets a value in the scorm API
+ * @param param
+ * @param val
+ */
 function set(param, val) {
     return new Promise(function (res, rej) {
-        res(true);
+        if (!API$1)
+            return rej('API Not found');
+        var success = (API$1.LMSSetValue(param, val) === 'true');
+        if (success)
+            return res(success);
+        return rej('Unable to set value');
     });
 }
+/**
+ * Gets a value from the scorm API
+ * @param param
+ */
 function get(param) {
     return new Promise(function (res, rej) {
-        res('res');
+        if (!API$1)
+            return rej('API Not found');
+        var val = API$1.LMSGetValue(param);
+        return res(val);
     });
 }
+/**
+ * Commits the SCORM api
+ */
 function commit() {
     return new Promise(function (res, rej) {
-        res(true);
+        if (!API$1)
+            return rej('API Not found');
+        var status = (API$1.LMSCommit('') === 'true');
+        if (status)
+            return res(status);
+        return rej('Unable to commit value');
     });
 }
-
-//# sourceMappingURL=index.js.map
 
 export { set, get, terminate, commit, init };

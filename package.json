@@ -1,8 +1,8 @@
 {
-  "name": "scorm-api",
+  "name": "scorm-promised",
   "version": "1.0.0",
   "description": "",
-  "main": "rollup.config.js",
+  "main": "dist/scorm.mjs",
   "directories": {
     "lib": "lib"
   },
@@ -10,8 +10,13 @@
     "build:watch": "rollup -c rollup.config.js --watch",
     "build:prod": "rollup -c rollup.config.js"
   },
+  "homepage": "https://github.com/SamuelHornsey/scorm-promised/blob/master/README.md",
   "author": "Samuel Hornsey (SH)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SamuelHornsey/scorm-promised.git"
+  },
   "devDependencies": {
     "http-server": "^0.11.1",
     "rollup": "^1.5.0",

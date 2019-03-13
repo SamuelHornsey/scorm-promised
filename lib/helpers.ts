@@ -53,7 +53,7 @@ function getAPI(): object {
 }
 
 /**
- *
+ * Get the API handle
  */
 export function getApiHandle(): object {
   if (!API || !isFound) {
