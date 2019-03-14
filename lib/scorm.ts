@@ -81,6 +81,10 @@ export function commit (): Promise<boolean> {
  */
 export function getErrorCode (): Promise<string> {
     return new Promise ((res, rej) => {
-        res('res');
+        if (!API) return rej('API Not found');
+
+        let errorCode = API.GetLastError();
+
+        return res(errorCode);
     });
 }
