@@ -5,7 +5,7 @@
 
 ### Currently *WIP*
 
-This simple SCORM API wrapper is designed to give developers a simple interface to the SCORM 1.4 API. This library is small and simple. It is tree shaking friendly. Only import the functions you are using.
+This simple SCORM API wrapper is designed to give developers a simple interface to the SCORM 1.2 API. This library is small and simple. It is tree shaking friendly. Only import the functions you are using.
 
 ## Installation
 
