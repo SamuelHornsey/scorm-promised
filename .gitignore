@@ -1,3 +1,4 @@
 node_modules
 test-old
 lib-old
+.DS_STORE
