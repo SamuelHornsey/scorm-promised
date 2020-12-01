@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - '12.13'
+
+before_deploy:
+  - npm run build:prod
+
+deploy:
+  provider: npm
+  email: hornseysam498@gmail.com
+  api_key:
+    secure: TBGAMLMdTAZaAEOGuuyFuE/5PdGSSvl950+qU1atUye4tLe8iIyXP75cV31L662qzzKf4YyGMm0ZJnYrl7HN3shMRmvAo1lAn+ylOeVbsV+1Zhi2wZtvpptB/K3w56/n9RVujWBSe/28W0nAMyH9ddYhlNZatQOHA7P3kUjEM6AxTo4p71rp/21XDUOcTSlWLe2JqxgHQaLxp3Nq8nHYZCQuQNEdeoX5YHLhI7GHDqlYWsjy957OPrLE1ZW286oiCptfFfNsfjt9qdhmW+ZqT4/8IOdNrhWurKsKgjQ2nY/aXMCg2Hj0tTp28ZBMVL8w7KJaby2YNmGMIBoCFtME1JQ7/tDjdHceyakYEPjXd0MbcJRMP/DZ5WSqGFbYV3Uh0a79xt2d0MUcszwZBkSY1PiDeBWxTHRaVcfgBxNqbIMaAGXA13073DA2PiJIDEfTyDByY9mUXkm8OqSNsllAR2aAp0E3ejgSrjx7dNVheyq8IurCMrGzyu2fm/dadSlnMMrWrEoZBVGUGD4OMfkwXLjo9cS7SdP74TPCVhuVsFLG2OBkqqAONQrTFZwSZMd/E8x/UE193EaJF6ghAMAR0wn8MSSD7Gic+qujeRrZPJp89IDFBqFJGDyp0Ub2AJI9ppmcxnR0rH2Xzn0A/ZNVagMtFgETKvUemymZ4isgnlY=
+  on:
+    tags: true
